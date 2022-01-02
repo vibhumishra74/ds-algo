@@ -147,20 +147,76 @@ class SingleLinkedList{
         if(val < 0 || val >= this.length) return console.log('plz enter valid no',null)
         let count = 0
         let current = this.head
-        while (current) {
-            if(val === count) console.log('found at',count, current)
-            count++
+        while (count !== val) {
+            // if(val === count) console.log('found at',count, current)
             current = current.next
+            count++
         }
-        return console.log('get node by undex',current)
+        // console.log('after while loop >>>>>>>')
+         console.log('get node by index>>>',current)
+        return current
     }
     set(val,point){ // set value at any instance
        let foundnode = this.get(point)
-       console.log('found node',foundnode)
+       console.log('found here',foundnode)
         if(foundnode){ foundnode.val = val
         return true
         } 
         return false
+    }
+    insert(val,point){
+        let newnode = new Node(val)
+        //check if correct pont requested or not
+        if(point < 0 || point > this.length) return undefined
+        //at begning
+        if(point === 0){
+            console.log('in zeroo')
+        if(!this.head){
+            this.head = newnode
+            this.tail = this.head
+        }else{
+            let currenthead = this.head
+             this.head = newnode
+            this.head.next = currenthead
+        }
+        this.length++
+        return this
+        }
+
+        //at end we can also used push method from above
+        if(this.length === point){
+            console.log('in last length')
+            // let newnode = new Node(point)
+            if(!this.head){
+                this.head = newnode
+                this.tail = this.head
+            }else{
+                this.tail.next = newnode
+                this.tail = newnode
+            }
+            this.length++
+            return this
+        }
+        //in between begning and end
+        let count = 1
+        let count0 = 0
+        let currenttail = this.head
+        let currenthead = this.head
+        while (count != point) {
+            currenttail = currenttail.next
+            count++
+        }
+        while (count0 != point) {
+            currenthead = currenthead.next
+            count0++
+        }
+        currenttail.next = newnode
+        currenttail.next.next = currenthead
+
+        // this.tail = newnode
+        console.log('in get one',count0,currenttail)
+        this.length++
+        return this
     }
 }
 let list = new SingleLinkedList()
@@ -173,9 +229,11 @@ list.push(300)
 // list.shift()
 // list.shift()
 // list.shift()
-list.unshift('I\'m new head')
-list.unshift(10)
+// list.unshift('I\'m new head')
+// list.unshift(10)
 // console.log('list',list)
-list.get(1)
-// list.set('im updated one',1)
+// list.get(2)
+// list.set('im updated one',13)
+// list.insert(250,2)
+list.insert(1250,0)
 list.list()
