@@ -218,11 +218,32 @@ class SingleLinkedList{
         this.length++
         return this
     }
+    remove(point){
+        if(point < 0 || point>this.length-1) return undefined
+        //at begning
+        if(point === 0) return this.shift()
+        //at last
+        if(point === this.length-1) return this.pop()
+        //in between
+        let current = this.head
+        let count = 1 //when count is 1 give me prevoius node when count 0 give me current node
+        while (count !== point) {
+            current = current.next
+            count++
+        }
+        let previousNode = current
+        let removenode = previousNode.next
+        previousNode.next = removenode.next
+        this.length--
+        return console.log('remove node here>>',removenode)
+
+    }
 }
 let list = new SingleLinkedList()
 list.push(100)
 list.push(200)
 list.push(300)
+list.push(400)
 // list.pop()
 // list.pop()
 // list.pop()
@@ -235,5 +256,6 @@ list.push(300)
 // list.get(2)
 // list.set('im updated one',13)
 // list.insert(250,2)
-list.insert(1250,0)
+// list.insert(1250,0)
+list.remove(3)
 list.list()
