@@ -238,6 +238,27 @@ class SingleLinkedList{
         return console.log('remove node here>>',removenode)
 
     }
+    reverse(){
+        let previousNode = null
+        let current = this.head
+        // let next = current.next
+        this.head = this.tail
+        this.tail = current
+        while (current !== null) {
+            let temp = current.next
+            current.next = previousNode
+            previousNode = current
+            current = temp
+        }
+        // for (let i = 0; i < this.length; i++) {
+        //     let temp = current.next
+        //     current.next = previousNode
+        //     previousNode = current
+        //     current = temp
+            
+        // }
+        return console.log('this',this)
+    }
 }
 let list = new SingleLinkedList()
 list.push(100)
@@ -257,5 +278,6 @@ list.push(400)
 // list.set('im updated one',13)
 // list.insert(250,2)
 // list.insert(1250,0)
-list.remove(3)
+// list.remove(2)
+list.reverse()
 list.list()
