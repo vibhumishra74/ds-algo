@@ -95,6 +95,10 @@ class SingleLinkedList{
 
     pop(){//remove from ending
         if(!this.head) return undefined
+        if(this.length === 0){
+            this.head = undefined
+            this.tail = undefined
+        }
         let current = this.head
         let newtail = current
         while (current.next) {
@@ -104,10 +108,6 @@ class SingleLinkedList{
         this.tail = newtail
         this.tail.next = null
         this.length--
-        if(this.length === 0){
-            this.head = undefined
-            this.tail = undefined
-        }
         // return console.log('current',this)
         return console.log('current',current)
     }
